@@ -35,6 +35,7 @@ export const useBooksStore = defineStore("booksStore", {
       };
 
       userStore.books.push(bookToPush);
+      localStorage.setItem("userBooks", userStore.books.toString());
     },
     async getBooksFromServer() {
       axios

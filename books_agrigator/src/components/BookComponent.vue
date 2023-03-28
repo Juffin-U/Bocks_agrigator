@@ -1,15 +1,16 @@
 <template>
   <div class="book">
-    <img
-      class="bookImage"
-      :src="require(`@/assets/img/${props.book.pathToPoster}`)"
-      :alt="props.book.name"
-    />
+    <div class="imageCont">
+      <img
+        class="bookImage"
+        :src="require(`@/assets/img/${props.book.pathToPoster}`)"
+        :alt="props.book.name"
+      />
+    </div>
     <div class="bookInfo">
       <div class="bookName">{{ props.book.name }}</div>
       <div class="bookName">{{ props.book.author }}</div>
       <div class="overview">{{ props.book.overview }}</div>
-      <div class="bookName">{{ props.book.id }}</div>
       <div class="addAndDeleteButtons" v-if="props.book.isRead !== undefined">
         <button
           class="bookReadButtons button"
@@ -59,50 +60,136 @@ const props = defineProps({
 });
 </script>
 <style scoped>
-.addAndDeleteButtons {
-  display: flex;
-  flex-direction: row;
+@media (min-width: 800px) {
+  .imageCont {
+    height: 100%;
+  }
+
+  .addAndDeleteButtons {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+  }
+
+  .bookInfo {
+    display: flex;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .book {
+    width: 700px;
+    min-height: 300px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    border: 2px solid #efefef;
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .bookImage {
+    width: 200px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10%;
+  }
+
+  .bookName {
+    display: flex;
+    align-items: start;
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .overview {
+    display: block;
+    margin-bottom: 20px;
+    height: 50%;
+    text-align: start;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .bookReadButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
 }
-.bookInfo {
-  display: flex;
-  padding: 20px;
-  height: 100%;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-}
-.book {
-  width: 700px;
-  height: 300px;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  margin: 20px;
-  border: 2px solid #efefef;
-  padding: 10px;
-  border-radius: 10px;
-}
-.bookImage {
-  width: 200px;
-  height: 300px;
-  object-fit: cover;
-  border-radius: 10%;
-}
-.bookName {
-  display: flex;
-  align-items: start;
-  width: 100%;
-  font-size: 20px;
-  margin-bottom: 20px;
-}
-.overview {
-  display: block;
-  margin-bottom: 20px;
-}
-.bookReadButtons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
+@media (max-width: 800px) {
+  .book {
+    width: 90%;
+    min-height: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #efefef;
+    border-radius: 22px 22px 10px 10px;
+    margin-bottom: 25px;
+  }
+  .imageCont {
+    height: 100%;
+    width: 100%;
+  }
+
+  .addAndDeleteButtons {
+    display: flex;
+    flex-direction: column;
+    height: 100px;
+    justify-content: space-between;
+    overflow: hidden;
+  }
+
+  .bookInfo {
+    display: flex;
+    padding: 20px;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+  }
+
+  .bookImage {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 10%;
+  }
+
+  .bookName {
+    display: flex;
+    align-items: start;
+    width: 100%;
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+
+  .overview {
+    display: block;
+    margin-bottom: 20px;
+    height: 50%;
+    text-align: start;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .bookReadButtons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
 }
 </style>

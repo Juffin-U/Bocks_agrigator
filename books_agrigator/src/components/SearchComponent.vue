@@ -7,28 +7,34 @@
       v-model="searchBook"
     />
   </form>
-  <div v-if="tmpBooksStore.length !== 0">
-    <BookComponent
-      v-for="book in tmpBooksStore"
-      :key="book.id"
-      :book="book"
-    ></BookComponent>
-  </div>
+  <h3 v-show="tmpBooksStore.length !== 0">
+    Найденно книг: {{ tmpBooksStore.length }}
+  </h3>
+  <slider-component
+    v-if="tmpBooksStore.length !== 0"
+    :searched-books="tmpBooksStore"
+    :key="searchKey"
+    class="sliderCont"
+  >
+  </slider-component>
 </template>
 
 <script setup>
 import { ref } from "vue";
 import { useBooksStore } from "@/store/BooksStore";
-import BookComponent from "@/components/BookComponent.vue";
+import SliderComponent from "@/components/SliderComponent.vue";
 
 let searchBook = ref("");
+let searchKey = ref("");
 
 const booksStore = useBooksStore();
-let tmpBooksStore = ref([]);
+const tmpBooksStore = ref([]);
 
 function getBooks() {
+  tmpBooksStore.value = [];
   tmpBooksStore.value = booksStore.searchBooks(searchBook.value);
-  console.log(tmpBooksStore.value);
+  console.log(tmpBooksStore.value.length);
+  searchKey.value = tmpBooksStore.value.length + tmpBooksStore.value;
 }
 </script>
 
@@ -44,5 +50,8 @@ function getBooks() {
   padding: 0 10px;
   margin-bottom: 20px;
   border-radius: 10px;
+}
+.sliderCont {
+  align-items: center;
 }
 </style>
